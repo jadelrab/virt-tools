@@ -82,7 +82,7 @@ virsh list
 echo
 echo "VNC display: 590"$(virsh vncdisplay ${GUEST})
 echo
-echo 'IMPORTANT :Add <driver name="qemu"/> to each virtio network interface !
+echo 'IMPORTANT :Add <driver name="qemu"/> to each virtio network interface !'
 
 # stuff to remember
 echo
