@@ -9,9 +9,9 @@
 # ref. http://mojodna.net/2014/05/14/kvm-libvirt-and-ubuntu-14-04.html
 #
 # requires the following packages on Ubuntu host:
-#  wget qemu-kvm libvirt-bin virtinst bridge-utils genisoimage
+#  apt-get install qemu-kvm libvirt-bin virtinst bridge-utils genisoimage
 # requires the following packages on CentOS host:
-#  wget qemu-kvm libvirt virt-install bridge-utils genisoimage
+#  yum install qemu-kvm libvirt virt-install bridge-utils genisoimage
 #
 
 # image selection : trusty, precise, centos7, fedora20, ...
