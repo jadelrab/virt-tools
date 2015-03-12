@@ -142,21 +142,19 @@ if [[ "$(virsh pool-list|grep ${POOL} -c)" -ne "1" ]]; then
   virsh pool-start ${POOL}
 fi
 
-# write the two cloud-init files into an ISO and copy it into libvirt's images directory
+# write the two cloud-init files into an ISO
 genisoimage -output configuration.iso -volid cidata -joliet -rock user-data meta-data
 # keep a backup of the files for future reference
 cp user-data user-data.${GUEST}
 cp meta-data meta-data.${GUEST}
-
-# generate and copy ISO into libvirt's directory
-genisoimage -output configuration.iso -volid cidata -joliet -rock user-data meta-data
+# copy ISO into libvirt's directory
 cp configuration.iso ${POOL_PATH}/${GUEST}.configuration.iso
 virsh pool-refresh ${POOL}
 
 # copy image to libvirt's pool
 if [[ ! -f ${POOL_PATH}/${IMG_NAME} ]]; then
   cp ${IMG_NAME} ${POOL_PATH}
-  virsh pool-refresh ${POOL} 
+  virsh pool-refresh ${POOL}
 fi
 
 # clone cloud image
