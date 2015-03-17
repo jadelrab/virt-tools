@@ -48,7 +48,7 @@ network-interfaces: |
   broadcast 192.168.122.255
   gateway 192.168.122.1
   dns-search ${DOMAIN}
-  dns-nameserver 192.168.122.1
+  dns-nameservers 192.168.122.1
 hostname: ${GUEST}
 local-hostname: ${GUEST}
 EOF
