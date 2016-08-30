@@ -15,7 +15,7 @@
 #
 
 # image selection : trusty, precise, centos7, fedora20, ...
-IMG="trusty"
+IMG="xenial"
 # architecture : amd64 or i386
 ARCH="amd64"
 # kvm defaults pool paths
@@ -91,12 +91,16 @@ fi
 #  ref. https://openstack.redhat.com/Image_resources
 case $IMG in
   precise)  IMG_USER="ubuntu"
-            IMG_URL="http://cloud-images.ubuntu.com/server/releases/12.04/release"
+            IMG_URL="https://cloud-images.ubuntu.com/releases/12.04/release"
             IMG_NAME="ubuntu-12.04-server-cloudimg-${ARCH}-disk1.img"
             ;;
   trusty)   IMG_USER="ubuntu"
-            IMG_URL="http://cloud-images.ubuntu.com/server/releases/14.04/release"
+            IMG_URL="https://cloud-images.ubuntu.com/releases/14.04/release"
             IMG_NAME="ubuntu-14.04-server-cloudimg-${ARCH}-disk1.img"
+            ;;
+  xenial)   IMG_USER="ubuntu"
+            IMG_URL="https://cloud-images.ubuntu.com/releases/16.04/release"
+            IMG_NAME="ubuntu-16.04-server-cloudimg-${ARCH}-disk1.img"
             ;;
   centos7)  IMG_USER="centos"
             IMG_URL="http://cloud.centos.org/centos/7/devel"
