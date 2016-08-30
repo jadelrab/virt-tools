@@ -22,7 +22,7 @@ ARCH="amd64"
 DEF_POOL=default
 DEF_POOL_PATH=/var/lib/libvirt/images
 # vm prefs : specify vm preferences for your guest
-GUEST=py
+GUEST=myguest
 DOMAIN=intranet.local
 VROOTDISKSIZE=10G
 VCPUS=2
