@@ -9,9 +9,9 @@
 # ref. http://mojodna.net/2014/05/14/kvm-libvirt-and-ubuntu-14-04.html
 #
 # requires the following packages on Ubuntu host:
-#  apt-get install qemu-kvm libvirt-bin virtinst bridge-utils genisoimage
+#  apt-get install qemu-kvm libvirt-bin virtinst bridge-utils cloud-image-utils
 # requires the following packages on CentOS host:
-#  yum install qemu-kvm libvirt virt-install bridge-utils genisoimage
+#  yum install qemu-kvm libvirt virt-install bridge-utils cloud-utils
 #
 
 # image selection : trusty, precise, centos7, fedora20, ...
@@ -147,7 +147,8 @@ if [[ "$(virsh pool-list|grep ${POOL} -c)" -ne "1" ]]; then
 fi
 
 # write the two cloud-init files into an ISO
-genisoimage -output configuration.iso -volid cidata -joliet -rock user-data meta-data
+#genisoimage -output configuration.iso -volid cidata -joliet -rock user-data meta-data
+cloud-localds configuration.iso user-data meta-data
 # keep a backup of the files for future reference
 cp user-data user-data.${GUEST}
 cp meta-data meta-data.${GUEST}
