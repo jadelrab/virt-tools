@@ -91,46 +91,58 @@ fi
 #  ref. https://openstack.redhat.com/Image_resources
 case $IMG in
   precise)  IMG_USER="ubuntu"
-            IMG_URL="https://cloud-images.ubuntu.com/releases/12.04/release"
+            IMG_URL="http://cloud-images.ubuntu.com/releases/12.04/release"
             IMG_NAME="ubuntu-12.04-server-cloudimg-${ARCH}-disk1.img"
             ;;
   trusty)   IMG_USER="ubuntu"
-            IMG_URL="https://cloud-images.ubuntu.com/releases/14.04/release"
+            IMG_URL="http://cloud-images.ubuntu.com/releases/14.04/release"
             IMG_NAME="ubuntu-14.04-server-cloudimg-${ARCH}-disk1.img"
             ;;
   xenial)   IMG_USER="ubuntu"
-            IMG_URL="https://cloud-images.ubuntu.com/releases/16.04/release"
+            IMG_URL="http://cloud-images.ubuntu.com/releases/16.04/release/"
             IMG_NAME="ubuntu-16.04-server-cloudimg-${ARCH}-disk1.img"
             ;;
+  centos6)  IMG_USER="centos"
+            IMG_URL="https://cloud.centos.org/centos/6/images"
+            if [[ $ARCH = "amd64" ]]; then
+              IMG_NAME="CentOS-6-x86_64-GenericCloud.qcow2"
+            else
+              echo "Cloud image not available!"; exit 1
+            fi
+            ;;
   centos7)  IMG_USER="centos"
-            IMG_URL="http://cloud.centos.org/centos/7/devel"
+            IMG_URL="https://cloud.centos.org/centos/7/images"
             if [[ $ARCH = "amd64" ]]; then
               IMG_NAME="CentOS-7-x86_64-GenericCloud.qcow2"
             else
-              echo "Cloud image not available!"
-              exit 1
+              echo "Cloud image not available!"; exit 1
             fi
             ;;
-  fedora20) IMG_USER="fedora"
+  fedora26) IMG_USER="fedora"
             if [[ $ARCH = "amd64" ]]; then
-              IMG_URL="http://download.fedoraproject.org/pub/fedora/linux/updates/20/Images/x86_64"
-              IMG_NAME="Fedora-x86_64-20-20140407-sda.qcow2"
+              IMG_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/26/CloudImages/x86_64/images/"
+              IMG_NAME="Fedora-Cloud-Base-26-1.5.x86_64.qcow2"
             else
-              IMG_URL="http://download.fedoraproject.org/pub/fedora/linux/updates/20/Images/i386"
-              IMG_NAME="Fedora-i386-20-20140407-sda.qcow2"
+              echo "Cloud image not available!"; exit 1
             fi
             ;;
-  wheezy)   IMG_USER="debian"
+  jessie)   IMG_USER="debian"
             if [[ $ARCH = "amd64" ]]; then
-              IMG_URL="Coud image not available. Use build-openstack-debian-image to build one!"
-              IMG_NAME="debian-wheezy-7.0.0-3-amd64.qcow2"
+              IMG_URL="https://cdimage.debian.org/cdimage/openstack/current-8"
+              IMG_NAME="debian-8-openstack-amd64.qcow2"
             else
-              IMG_NAME="Cloud image not available."
-              exit 1
+              echo "Cloud image not available!"; exit 1
             fi
             ;;
-  *)        echo "Cloud image not available!"
-            exit 1
+  stretch)  IMG_USER="debian"
+            if [[ $ARCH = "amd64" ]]; then
+              IMG_URL="https://cdimage.debian.org/cdimage/openstack/current-9"
+              IMG_NAME="debian-9-openstack-amd64.qcow2"
+            else
+              echo "Cloud image not available!"; exit 1
+            fi
+            ;;
+  *)        echo "Cloud image not available!"; exit 1
             ;;
 esac
 if [[ ! -f ${IMG_NAME} ]]; then
